@@ -1,12 +1,14 @@
 package com.example.viewdata
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+
 class CustomAdapter : RecyclerView.Adapter<CustomAdapter.Myholder> {
     private var c: Activity? = null
     private var databuah: Array<String>? = null
@@ -22,6 +24,12 @@ class CustomAdapter : RecyclerView.Adapter<CustomAdapter.Myholder> {
 //manggil dan set data
         holder.txt?.text = databuah?.get(position)
         holder.img?.setImageResource(datagambar?.get(position)!!)
+        holder.img?.setOnClickListener {
+            var intent = Intent(c, DetailBuahActivity::class.java)
+            intent.putExtra("txt", databuah?.get(position))
+            intent.putExtra("img", datagambar?.get(position))
+            c?.startActivity(intent)
+        }
     }
     //mencreate pada layout list item
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
